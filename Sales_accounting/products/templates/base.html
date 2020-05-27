@@ -17,10 +17,10 @@
             <a href="{% url 'products:product_list' %}">Products</a>
         </li>
         <li {% if section == 'images' %} class="selected" {% endif %}>
-            <a href="#">Images</a>
+            <a href="{% url 'sales:sales_list' %}">Sales</a>
         </li>
         <li {% if section == 'people' %} class="selected" {% endif %}>
-            <a href="#">People</a>
+            <a href="#">Leftovers</a>
         </li>
     </ul>
 

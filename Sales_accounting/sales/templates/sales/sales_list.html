@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Sales
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        <header>
+            <a class="button" href="{% url 'sales:sale_create' %}">Add new sale</a>
+        </header>
+    </p>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Время</th>
+            <th scope="col">Продукт</th>
+            <th scope="col">Количество</th>
+            <th scope="col">Итоговая цена</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for sale in sales %}
+            <tr>
+                <th scope="row">{{ sale.id }}</th>
+                <th scope="row">{{ sale.time }}</th>
+                <th scope="row">{{ sale.product.name }}</th>
+                <th scope="row">{{ sale.amount }}</th>
+                <th scope="row">{{ sale.final_price }}</th>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

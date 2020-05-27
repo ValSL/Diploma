@@ -19,6 +19,7 @@
             <th scope="col">Цена</th>
             <th scope="col">Количество</th>
             <th scope="col">Группа</th>
+            <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
@@ -29,6 +30,7 @@
                 <td>{{ product.price }}</td>
                 <td>{{ product.amount }}</td>
                 <td>{{ product.group.name }}</td>
+                <td scope="col"><a class="button-danger" href="{% url 'products:product_delete' product.id %}">DELETE</a></td>
             </tr>
         {% endfor %}
         </tbody>

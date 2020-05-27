@@ -25,3 +25,9 @@ def product_create(request):
     else:
         form = ProductCreateForm()
         return render(request, 'products/proudct_create.html', {'form': form})
+
+
+def product_delete(request, id):
+    product_for_delete = Product.objects.get(id=id)
+    product_for_delete.delete()
+    return redirect('products:product_list')
