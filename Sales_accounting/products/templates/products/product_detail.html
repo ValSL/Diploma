@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ product.name|capfirst }}
+{% endblock %}
+
+{% block content %}
+    <p>{{ product.name }}</p>
+    <p>{{ product.price }}</p>
+    <p>{{ product.amount }}</p>
+    <p>{{ product.group.name }}</p>
+{% endblock %}
