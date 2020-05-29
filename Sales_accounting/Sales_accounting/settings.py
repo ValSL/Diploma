@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'products',
     'sales',
+    'counterparties'
 ]
 
 MIDDLEWARE = [
@@ -79,10 +80,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'diplom',
-        'USER': 'diplom_user',
-        'PASSWORD': 'etereg14',
-        'HOST': 'localhost',
-        'PORT': '',
+        'USER': 'valid',
+        # 'PASSWORD': 'etereg14',
+        # 'HOST': 'localhost',
+        # 'PORT': '',
     }
 }
 

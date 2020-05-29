@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Counterparty create
+{% endblock %}
+
+{% block content %}
+    <form action="{% url 'counterparties:counterparties_create' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Create">
+    </form>
+{% endblock %}

@@ -1,4 +1,5 @@
 from django.db import models
+from counterparties.models import Counterparty
 
 
 class ProductGroup(models.Model):
@@ -16,3 +17,11 @@ class Product(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+
+
+class Purchase(models.Model):
+    time = models.DateTimeField(auto_now_add=True)
+    counterparty = models.ForeignKey(Counterparty, on_delete=models.CASCADE, related_name='purchases')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='purchases')
+    amount = models.IntegerField()
+

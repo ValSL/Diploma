@@ -7,7 +7,7 @@ from django.contrib import messages
 
 def sales_list(request):
     sales = Sale.objects.all()
-    return render(request, 'sales/sales_list.html', {'sales': sales})
+    return render(request, 'sales/sales_list.html', {'sales': sales, 'section': 'sales'})
 
 
 def sale_create(request):
@@ -20,10 +20,7 @@ def sale_create(request):
             current_product = Product.objects.get(id=new_sale.product.id)
             current_product.amount -= new_sale.amount
             current_product.save()
-            messages.success(request, 'Sale added successfully!')
-        else:
-            messages.error(request, 'Sale not created, wrong amount of products!')
-        return redirect('sales:sales_list')
+        return render(request, 'sales/sale_create.html', {'form': form})
     else:
         form = SaleCreateForm()
         return render(request, 'sales/sale_create.html', {'form': form})

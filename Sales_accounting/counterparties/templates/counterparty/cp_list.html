@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Counterparties
+{% endblock %}
+
+{% block content %}
+    <p>
+        <header>
+            <a class="button" href="{% url 'counterparties:counterparties_create' %}">Add new counterparty</a>
+        </header>
+    </p>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Название</th>
+            <th scope="col">Телефон</th>
+            <th scope="col">E-mail</th>
+            <th scope="col">Баланс</th>
+            <th scope="col">Тип</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for cp in cps %}
+            <tr>
+                <th scope="row">{{ cp.id }}</th>
+                {#                <td><a href="{% url 'products:product_detail' product.id %}">{{ product.name }}</a></td>#}
+                <td>{{ cp.name }}</td>
+                <td>{{ cp.phone }}</td>
+                <td>{{ cp.email }}</td>
+                <td>{{ cp.balance }}</td>
+                <td>{{ cp.type|title }}</td>
+                {#                <td scope="col"><a class="button-danger" href="{% url 'products:product_delete' product.id %}">DELETE</a></td>#}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

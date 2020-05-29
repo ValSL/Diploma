@@ -13,14 +13,17 @@
 <div id="header">
     <span class="logo">Sales accounting</span>
     <ul class="menu">
-        <li {% if section == 'dashboard' %}class="selected" {% endif %}>
+        <li {% if section == 'products' %}class="selected" {% endif %}>
             <a href="{% url 'products:product_list' %}">Products</a>
         </li>
-        <li {% if section == 'images' %} class="selected" {% endif %}>
+        <li {% if section == 'sales' %} class="selected" {% endif %}>
             <a href="{% url 'sales:sales_list' %}">Sales</a>
         </li>
         <li {% if section == 'people' %} class="selected" {% endif %}>
             <a href="#">Leftovers</a>
+        </li>
+        <li {% if section == 'cp' %} class="selected" {% endif %}>
+            <a href="{% url 'counterparties:counterparties_list' %}">Counterparties</a>
         </li>
     </ul>
 
