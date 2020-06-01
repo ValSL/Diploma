@@ -23,5 +23,6 @@ class Purchase(models.Model):
     time = models.DateTimeField(auto_now_add=True)
     counterparty = models.ForeignKey(Counterparty, on_delete=models.CASCADE, related_name='purchases')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='purchases')
+    purchase_price = models.IntegerField(default=0)
     amount = models.IntegerField()
 

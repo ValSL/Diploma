@@ -18,11 +18,12 @@ class ProductCreateForm(forms.ModelForm):
 class PurchaseCreateForm(forms.ModelForm):
     class Meta:
         model = Purchase
-        fields = ['counterparty', 'product', 'amount']
+        fields = ['counterparty', 'product', 'purchase_price', 'amount']
 
         widgets = {
             'counterparty': forms.Select(attrs={'class': 'form-control'}),
             'product': forms.Select(attrs={'class': 'form-control'}),
+            'purchase_price': forms.NumberInput(attrs={'class': 'form-control'}),
             'amount': forms.NumberInput(attrs={'class': 'form-control'}),
         }
 

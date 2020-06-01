@@ -79,11 +79,11 @@ WSGI_APPLICATION = 'Sales_accounting.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'diplom',
-        'USER': 'valid',
-        # 'PASSWORD': 'etereg14',
-        # 'HOST': 'localhost',
-        # 'PORT': '',
+        'NAME': 'diplom2',
+        'USER': 'diplom2user',
+        'PASSWORD': 'etereg14',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
