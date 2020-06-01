@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Products
+{% endblock %}
+
+{% block content %}
+{#    <p>#}
+{#        <header>#}
+{#            <a class="button" href="{% url 'products:product_create' %}">Add new product</a>#}
+{#            <a class="button" href="{% url 'products:purchase' %}">Add purchase</a>#}
+{#        </header>#}
+{#    </p>#}
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Время</th>
+            <th scope="col">Контрагент</th>
+            <th scope="col">Продукт</th>
+            <th scope="col">Сумма</th>
+            <th scope="col">Количество</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for purchase in purchases %}
+            <tr>
+                <th scope="row">{{ purchase.id }}</th>
+{#                <td><a href="{% url 'products:product_detail' product.id %}">{{ product.name }}</a></td>#}
+                <td>{{ purchase.time }}</td>
+                <td>{{ purchase.counterparty }}</td>
+                <td>{{ purchase.product.name }}</td>
+                <td>{{ purchase.full_purchase_price}}</td>
+{#                <td scope="col"><a class="button-danger" href="{% url 'products:product_delete' product.id %}">DELETE</a></td>#}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -24,5 +24,6 @@ class Purchase(models.Model):
     counterparty = models.ForeignKey(Counterparty, on_delete=models.CASCADE, related_name='purchases')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='purchases')
     purchase_price = models.IntegerField(default=0)
+    full_purchase_price = models.IntegerField(default=0)
     amount = models.IntegerField()
 

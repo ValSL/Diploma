@@ -1,12 +1,17 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Product
+from .models import Product, Purchase
 from .forms import ProductCreateForm, PurchaseCreateForm, ProductGroupCreateForm
 
 
 def product_list(request):
     products = Product.objects.all()
     return render(request, 'products/product_list.html', {'products': products, 'section': 'products'})
+
+
+def purchase_list(request):
+    purchases = Purchase.objects.all()
+    return render(request, 'products/purchase_list.html', {'purchases': purchases, 'section': 'purchases'})
 
 
 def product_detail(request, id):
@@ -37,13 +42,15 @@ def purchase_create(request):
     if request.method == 'POST':
         form = PurchaseCreateForm(request.POST)
         if form.is_valid():
-            form.save(commit=False)
-            product = form.cleaned_data['product']
+            instance = form.save(commit=False)
             product_amount = form.cleaned_data['amount']
+            purchase_price = form.cleaned_data['purchase_price']
+            instance.full_purchase_price = product_amount * purchase_price
+            product = form.cleaned_data['product']
             product.amount += product_amount
             product.save()
             form.save()
-            return redirect('products:product_list')
+            return redirect('products:purchase_list')
         return render(request, 'products/purchase.html', {'form': form})
     else:
         form = PurchaseCreateForm()
@@ -60,4 +67,3 @@ def product_group_create(request):
     else:
         form = ProductGroupCreateForm()
         return render(request, 'products/product_group_create.html', {'form': form})
-
