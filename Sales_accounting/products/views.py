@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Product
-from .forms import ProductCreateForm, PurchaseCreateForm
+from .forms import ProductCreateForm, PurchaseCreateForm, ProductGroupCreateForm
 
 
 def product_list(request):
@@ -48,3 +48,16 @@ def purchase_create(request):
     else:
         form = PurchaseCreateForm()
         return render(request, 'products/purchase.html', {'form': form})
+
+
+def product_group_create(request):
+    if request.method == 'POST':
+        form = ProductGroupCreateForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('products:product_create')
+        return render(request, 'products/product_group_create.html', {'form': form})
+    else:
+        form = ProductGroupCreateForm()
+        return render(request, 'products/product_group_create.html', {'form': form})
+

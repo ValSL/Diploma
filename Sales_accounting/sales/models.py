@@ -8,5 +8,6 @@ class Sale(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     amount = models.IntegerField()
     final_price = models.IntegerField()
+    buyer = models.ForeignKey('counterparties.Counterparty', on_delete=models.CASCADE, related_name='sales', null=True)
 
 

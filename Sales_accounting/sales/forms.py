@@ -6,11 +6,12 @@ from django.forms import ValidationError
 class SaleCreateForm(forms.ModelForm):
     class Meta:
         model = Sale
-        fields = ['product', 'amount']
+        fields = ['product', 'amount', 'buyer']
 
         widgets = {
             'product': forms.Select(attrs={'class': 'form-control'}),
             'amount': forms.NumberInput(attrs={'class': 'form-control'}),
+            'buyer': forms.Select(attrs={'class': 'form-control'}),
         }
 
     def clean_amount(self):
@@ -19,4 +20,10 @@ class SaleCreateForm(forms.ModelForm):
         if amount > product.amount:
             raise ValidationError('Too much amount!')
         return amount
+
+    def clean_buyer(self):
+        buyer = self.cleaned_data['buyer']
+        if buyer.type != 'buyer':
+            raise ValidationError('Please choose buyer counteragent')
+        return buyer
 
