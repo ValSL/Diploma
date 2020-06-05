@@ -32,6 +32,7 @@
                 <td>{{ purchase.counterparty }}</td>
                 <td>{{ purchase.product.name }}</td>
                 <td>{{ purchase.full_purchase_price}}</td>
+                <td>{{ purchase.amount}}</td>
 {#                <td scope="col"><a class="button-danger" href="{% url 'products:product_delete' product.id %}">DELETE</a></td>#}
             </tr>
         {% endfor %}
