@@ -1,4 +1,5 @@
 from django.db import models
+from account.models import Profile
 
 
 class Counterparty(models.Model):
@@ -9,6 +10,7 @@ class Counterparty(models.Model):
     product_group = models.ManyToManyField('products.ProductGroup')
     balance = models.IntegerField(default=0)
     type = models.CharField(choices=type_choises, max_length=20)
+    created_user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='counterpartyes', null=True)
 
     def __str__(self):
         return self.name

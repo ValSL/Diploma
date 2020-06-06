@@ -2,15 +2,18 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Product, Purchase
 from .forms import ProductCreateForm, PurchaseCreateForm, ProductGroupCreateForm
+from django.contrib.auth.decorators import login_required
 
 
+@login_required
 def product_list(request):
-    products = Product.objects.all()
+    products = Product.objects.filter(created_user=request.user.profile)
     return render(request, 'products/product_list.html', {'products': products, 'section': 'products'})
 
 
+@login_required
 def purchase_list(request):
-    purchases = Purchase.objects.all()
+    purchases = Purchase.objects.filter(created_user=request.user.profile)
     return render(request, 'products/purchase_list.html', {'purchases': purchases, 'section': 'purchases'})
 
 
@@ -25,6 +28,8 @@ def product_create(request):
     if request.method == 'POST':
         form = ProductCreateForm(request.POST)
         if form.is_valid():
+            instance = form.save(commit=False)
+            instance.created_user = request.user.profile
             form.save()
         return redirect('products:product_list')
     else:
@@ -48,6 +53,7 @@ def purchase_create(request):
             instance.full_purchase_price = product_amount * purchase_price
             product = form.cleaned_data['product']
             product.amount += product_amount
+            instance.created_user = request.user.profile
             product.save()
             form.save()
             return redirect('products:purchase_list')
@@ -61,6 +67,8 @@ def product_group_create(request):
     if request.method == 'POST':
         form = ProductGroupCreateForm(request.POST)
         if form.is_valid():
+            instance = form.save(commit=False)
+            instance.created_user = request.user.profile
             form.save()
             return redirect('products:product_create')
         return render(request, 'products/product_group_create.html', {'form': form})
