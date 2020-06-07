@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .models import Product, Purchase
 from .forms import ProductCreateForm, PurchaseCreateForm, ProductGroupCreateForm
 from django.contrib.auth.decorators import login_required
+from sales.models import Sale
 
 
 @login_required
@@ -75,3 +76,17 @@ def product_group_create(request):
     else:
         form = ProductGroupCreateForm()
         return render(request, 'products/product_group_create.html', {'form': form})
+
+
+def overview(request):
+    sum_sales = 0
+    sum_purchases = 0
+    if request.method == 'GET':
+        all_sales = Sale.objects.filter(created_user=request.user.profile)
+        all_purchases = Purchase.objects.filter(created_user=request.user.profile)
+        for sale in all_sales:
+            sum_sales += sale.final_price
+        for pur in all_purchases:
+            sum_purchases += pur.full_purchase_price
+        profit = sum_sales - sum_purchases
+    return render(request, 'products/overview.html', {'profit': profit})

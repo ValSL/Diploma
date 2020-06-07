@@ -25,9 +25,12 @@
         <li {% if section == 'cp' %} class="selected" {% endif %}>
             <a href="{% url 'counterparties:counterparties_list' %}">Counterparties</a>
         </li>
+        <li {% if section == 'cp' %} class="selected" {% endif %}>
+            <a href="{% url 'products:overview' %}">Overview</a>
+        </li>
     </ul>
 
-        <span class="user">
+    <span class="user">
             {% if request.user.is_authenticated %}
                 <a href="{% url 'edit' %}">Hello {{ request.user.first_name }}</a>,
                 <a href="{% url 'logout' %}">Logout</a>
