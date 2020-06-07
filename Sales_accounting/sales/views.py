@@ -23,7 +23,7 @@ def sale_create(request):
             current_product = Product.objects.get(id=new_sale.product.id)
             current_product.amount -= new_sale.amount
             current_product.save()
-        return render(request, 'sales/sales_list.html', {'form': form})
+        return render(request, 'sales/sale_create.html', {'form': form})
     else:
         form = SaleCreateForm()
         return render(request, 'sales/sale_create.html', {'form': form})

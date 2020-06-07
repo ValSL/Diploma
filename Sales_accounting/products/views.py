@@ -6,6 +6,9 @@ from django.contrib.auth.decorators import login_required
 from sales.models import Sale
 
 
+# from django.views.generic import
+
+
 @login_required
 def product_list(request):
     products = Product.objects.filter(created_user=request.user.profile)
@@ -20,7 +23,14 @@ def purchase_list(request):
 
 def product_detail(request, id):
     product = Product.objects.get(id=id)
-    return render(request, 'products/product_detail.html', {'product': product})
+    if request.method == 'POST':
+        form = ProductCreateForm(request.POST, instance=product)
+        if form.is_valid():
+            form.save()
+        return render(request, 'products/product_detail.html', {'form': form})
+    else:
+        form = ProductCreateForm(instance=product)
+        return render(request, 'products/product_detail.html', {'form': form})
 
 
 def product_create(request):
@@ -81,6 +91,7 @@ def product_group_create(request):
 def overview(request):
     sum_sales = 0
     sum_purchases = 0
+    profit = 0
     if request.method == 'GET':
         all_sales = Sale.objects.filter(created_user=request.user.profile)
         all_purchases = Purchase.objects.filter(created_user=request.user.profile)
@@ -89,4 +100,4 @@ def overview(request):
         for pur in all_purchases:
             sum_purchases += pur.full_purchase_price
         profit = sum_sales - sum_purchases
-    return render(request, 'products/overview.html', {'profit': profit})
+    return render(request, 'products/overview.html', {'profit': profit, 'section': 'overview'})

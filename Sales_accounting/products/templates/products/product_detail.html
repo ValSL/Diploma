@@ -5,8 +5,9 @@
 {% endblock %}
 
 {% block content %}
-    <p>{{ product.name }}</p>
-    <p>{{ product.price }}</p>
-    <p>{{ product.amount }}</p>
-    <p>{{ product.group.name }}</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+    <input type="submit" value="Save">
+    </form>
 {% endblock %}

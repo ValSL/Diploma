@@ -5,10 +5,27 @@
 {% endblock %}
 
 {% block content %}
-    {% if profit > 0 %}
-        Profit: {{ profit }}
-    {% else %}
-        Loss: {{ profit }}
-    {% endif %}
+
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Состояние</th>
+            <th scope="col">Сумма</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                {% if profit > 0 %}
+                    Профит
+                {% else %}
+                    Убытки
+                {% endif %}
+            </td>
+            <td>{{ profit }}</td>
+        </tr>
+        </tbody>
+    </table>
 
 {% endblock %}
