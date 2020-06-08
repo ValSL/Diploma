@@ -4,6 +4,7 @@ from .models import Product, Purchase
 from .forms import ProductCreateForm, PurchaseCreateForm, ProductGroupCreateForm
 from django.contrib.auth.decorators import login_required
 from sales.models import Sale
+from django.contrib import messages
 
 
 # from django.views.generic import
@@ -27,6 +28,7 @@ def product_detail(request, id):
         form = ProductCreateForm(request.POST, instance=product)
         if form.is_valid():
             form.save()
+        messages.success(request, 'Changes saved')
         return render(request, 'products/product_detail.html', {'form': form})
     else:
         form = ProductCreateForm(instance=product)
@@ -51,6 +53,7 @@ def product_create(request):
 def product_delete(request, id):
     product_for_delete = Product.objects.get(id=id)
     product_for_delete.delete()
+    messages.error(request, 'Product deleted successfully')
     return redirect('products:product_list')
 
 
@@ -67,6 +70,7 @@ def purchase_create(request):
             instance.created_user = request.user.profile
             product.save()
             form.save()
+            messages.success(request, 'Purchase created successfully!')
             return redirect('products:purchase_list')
         return render(request, 'products/purchase.html', {'form': form})
     else:

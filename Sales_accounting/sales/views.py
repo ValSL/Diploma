@@ -27,3 +27,10 @@ def sale_create(request):
     else:
         form = SaleCreateForm()
         return render(request, 'sales/sale_create.html', {'form': form})
+
+
+def sale_delete(request, id):
+    sale_for_delete = Sale.objects.get(id=id)
+    sale_for_delete.delete()
+    messages.error(request, 'Sale deleted successfully')
+    return redirect('sales:sales_list')

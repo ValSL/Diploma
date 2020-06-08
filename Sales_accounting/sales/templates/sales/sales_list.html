@@ -20,7 +20,7 @@
             <th scope="col">Продукт</th>
             <th scope="col">Количество</th>
             <th scope="col">Итоговая цена</th>
-            <th scope="col"></th>
+            <th scope="col">Удалить</th>
         </tr>
         </thead>
         <tbody>
@@ -31,6 +31,8 @@
                 <th scope="row">{{ sale.product.name }}</th>
                 <th scope="row">{{ sale.amount }}</th>
                 <th scope="row">{{ sale.final_price }}</th>
+                <td scope="col"><a class="button-danger"
+                                   href="{% url 'sales:sale_delete' sale.id %}">DELETE</a></td>
             </tr>
         {% endfor %}
         </tbody>

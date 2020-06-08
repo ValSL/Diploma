@@ -6,6 +6,7 @@ from django.contrib import messages
 from .forms import UserRegistrationForm, UserEditForm, ProfileEditForm
 from .models import Profile
 
+
 # Функция регистрации
 def register(request):
     if request.method == 'POST':
